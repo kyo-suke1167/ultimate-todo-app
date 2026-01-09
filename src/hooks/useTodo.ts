@@ -1,7 +1,7 @@
 // src/hooks/useTodo.ts
 import { useAtom } from "jotai";
 import { v4 as uuidv4 } from "uuid";
-import { todoListState, searchKeywordState } from "../state/todoState";
+import { todoListState, searchKeywordState, sortOrderState } from "../state/todoState";
 import { type Todo } from "../types/todo";
 import { supabase } from "../lib/supabase"; // 👈 追加
 import { useEffect } from "react";
@@ -9,6 +9,7 @@ import { useEffect } from "react";
 export const useTodo = () => {
   const [todoList, setTodoList] = useAtom(todoListState);
   const [searchKeyword, setSearchKeyword] = useAtom(searchKeywordState);
+  const [sortOrder, setSortOrder] = useAtom(sortOrderState);
 
   // 📥 1. 初期データ取得 (DBから読み込む)
   const fetchTodos = async () => {
@@ -39,25 +40,21 @@ export const useTodo = () => {
   }, []);
 
   // ➕ 2. 追加 (DBにインサート)
-  const addTodo = async (title: string, deadlineStr: string, detail: string) => {
+  const addTodo = async (title: string, deadlineStr: string, detail: string, priority: Todo["priority"]) => {
     const id = uuidv4();
     const newTodo = {
       id,
       title,
       detail,
       status: "waiting",
-      priority: "low",
-      created_at: new Date().toISOString(), // DBのカラム名に合わせる
+      priority: priority, // 👈 ここを固定値から変数に変えるお！
+      created_at: new Date().toISOString(),
       deadline: deadlineStr ? new Date(deadlineStr).toISOString() : null,
     };
 
     const { error } = await supabase.from("todos").insert([newTodo]);
-
-    if (error) {
-      alert("保存に失敗した...");
-    } else {
-      fetchTodos(); // 成功したら再取得して画面を更新！
-    }
+    if (error) alert("保存に失敗した...");
+    else fetchTodos();
   };
 
   // 🗑️ 3. 削除 (DBから消す)
@@ -96,10 +93,25 @@ export const useTodo = () => {
     todo.title.toLowerCase().includes(searchKeyword.toLowerCase())
   );
 
+  // 🦁 ここが重要！ソートを適用するお
+  const sortedTodoList = [...filteredTodoList].sort((a, b) => {
+    if (sortOrder === "deadline") {
+      // 期限順：期限がないものは一番後ろにするお
+      const dateA = a.deadline ? new Date(a.deadline).getTime() : Infinity;
+      const dateB = b.deadline ? new Date(b.deadline).getTime() : Infinity;
+      return dateA - dateB;
+    } else {
+      // 作成日順（デフォルト）
+      return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime();
+    }
+  });
+
   return {
     todoList,
-    filteredTodoList,
+    filteredTodoList:sortedTodoList,
     searchKeyword,
+    sortOrder,       // 👈 追加
+    setSortOrder,
     setSearchKeyword,
     addTodo,
     deleteTodo,
