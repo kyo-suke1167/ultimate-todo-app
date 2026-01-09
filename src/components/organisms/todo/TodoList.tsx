@@ -2,7 +2,7 @@
 
 import { Box, Heading, VStack, Text, IconButton, Flex, Spacer, Badge, Menu, MenuButton, MenuList, MenuItem, HStack, Tooltip } from "@chakra-ui/react"
 import { type Todo } from "../../../types/todo"
-import { FaTrash, FaChevronDown, FaClock, FaCalendarAlt, FaPen, FaExclamationCircle } from "react-icons/fa"
+import { FaTrash, FaChevronDown, FaClock, FaCalendarAlt, FaPen } from "react-icons/fa"
 
 type Props = {
   todoList: Todo[];

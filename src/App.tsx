@@ -54,7 +54,7 @@ export const App = () => {
       <Heading mb={8} textAlign="center">Ultimate ToDo App</Heading>
       
       {/* 検索とソートの並びを綺麗に統合したお */}
-      <Flex gap={4} mb={8} align="flex-end">
+      <Flex gap={4} mb={8} align="stretch"> {/* 👈 center から stretch に変更！ */}
         <Box flex={1}>
           <SearchInput 
             value={searchKeyword}
@@ -64,6 +64,7 @@ export const App = () => {
         
         <ButtonGroup isAttached variant="outline" size="md" bg="white" borderRadius="md">
           <Button 
+            h="auto" // 👈 高さを親（Flex）に合わせる指定だお
             onClick={() => setSortOrder("createdAt")}
             colorScheme={sortOrder === "createdAt" ? "teal" : "gray"}
             variant={sortOrder === "createdAt" ? "solid" : "outline"}
@@ -71,6 +72,7 @@ export const App = () => {
             作成順
           </Button>
           <Button 
+            h="auto" // 👈 高さを親（Flex）に合わせる指定だお
             onClick={() => setSortOrder("deadline")}
             colorScheme={sortOrder === "deadline" ? "teal" : "gray"}
             variant={sortOrder === "deadline" ? "solid" : "outline"}
