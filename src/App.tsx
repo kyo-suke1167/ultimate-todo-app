@@ -1,4 +1,3 @@
-// src/App.tsx
 import { useState } from "react"
 import { AddTodoInput } from "./components/molecules/AddTodoInput"
 import { SearchInput } from "./components/molecules/SearchInput"
@@ -48,13 +47,11 @@ export const App = () => {
     updateTodoContent(id, title, detail, deadline);
   };
 
-  // 🦁 ここの return ひとつだけでOKだお！
   return (
     <Box p={10} maxW="800px" mx="auto">
-      <Heading mb={8} textAlign="center">Ultimate ToDo App</Heading>
+      <Heading mb={8} textAlign="center">ToDo</Heading>
       
-      {/* 検索とソートの並びを綺麗に統合したお */}
-      <Flex gap={4} mb={8} align="stretch"> {/* 👈 center から stretch に変更！ */}
+      <Flex gap={4} mb={8} align="stretch">
         <Box flex={1}>
           <SearchInput 
             value={searchKeyword}
@@ -64,7 +61,7 @@ export const App = () => {
         
         <ButtonGroup isAttached variant="outline" size="md" bg="white" borderRadius="md">
           <Button 
-            h="auto" // 👈 高さを親（Flex）に合わせる指定だお
+            h="auto"
             onClick={() => setSortOrder("createdAt")}
             colorScheme={sortOrder === "createdAt" ? "teal" : "gray"}
             variant={sortOrder === "createdAt" ? "solid" : "outline"}
@@ -72,7 +69,7 @@ export const App = () => {
             作成順
           </Button>
           <Button 
-            h="auto" // 👈 高さを親（Flex）に合わせる指定だお
+            h="auto"
             onClick={() => setSortOrder("deadline")}
             colorScheme={sortOrder === "deadline" ? "teal" : "gray"}
             variant={sortOrder === "deadline" ? "solid" : "outline"}

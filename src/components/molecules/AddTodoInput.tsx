@@ -1,9 +1,7 @@
-// src/components/molecules/AddTodoInput.tsx
-
 import { Flex, Input, Textarea, Box, Grid, GridItem, FormLabel, FormControl, Select } from "@chakra-ui/react"
 import { PrimaryButton } from "../atoms/button/PrimaryButton"
 import { PrimaryInput } from "../atoms/input/PrimaryInput"
-import { type Todo } from "../../types/todo" // 型をインポート
+import { type Todo } from "../../types/todo"
 import type { ChangeEvent } from "react"
 
 type Props = {
@@ -14,7 +12,6 @@ type Props = {
   detailValue: string;
   onDetailChange: (e: ChangeEvent<HTMLTextAreaElement>) => void;
   
-  // 🦁 追加：優先度のためのプロパティだお！
   priorityValue: Todo["priority"];
   onPriorityChange: (e: ChangeEvent<HTMLSelectElement>) => void;
 
@@ -27,17 +24,15 @@ export const AddTodoInput = (props: Props) => {
     inputValue, onChange, 
     deadlineValue, onDeadlineChange, 
     detailValue, onDetailChange, 
-    priorityValue, onPriorityChange, // 👈 追加
+    priorityValue, onPriorityChange, 
     onClick, disabled = false 
   } = props;
 
   return (
     <Box bg="white" p={6} borderRadius="lg" shadow="md" w="100%" borderWidth="1px" borderColor="gray.100">
       
-      {/* 🦁 グリッドを3列（タイトル・期限・優先度）に調整したお！ */}
       <Grid templateColumns={{ base: "1fr", md: "2fr 1fr 1fr" }} gap={4} mb={4}>
         
-        {/* タイトル入力 */}
         <GridItem>
           <FormControl>
             <FormLabel fontSize="sm" color="gray.500" fontWeight="bold">タイトル</FormLabel>
@@ -49,7 +44,6 @@ export const AddTodoInput = (props: Props) => {
           </FormControl>
         </GridItem>
 
-        {/* 期限日入力 */}
         <GridItem>
           <FormControl>
             <FormLabel fontSize="sm" color="gray.500" fontWeight="bold">期限日</FormLabel>
@@ -66,7 +60,6 @@ export const AddTodoInput = (props: Props) => {
           </FormControl>
         </GridItem>
 
-        {/* 🦁 追加：優先度選択だお！ */}
         <GridItem>
           <FormControl>
             <FormLabel fontSize="sm" color="gray.500" fontWeight="bold">優先度</FormLabel>
@@ -88,7 +81,6 @@ export const AddTodoInput = (props: Props) => {
 
       </Grid>
 
-      {/* 詳細入力エリア */}
       <FormControl mb={4}>
         <FormLabel fontSize="sm" color="gray.500" fontWeight="bold">詳細メモ (任意)</FormLabel>
         <Textarea 

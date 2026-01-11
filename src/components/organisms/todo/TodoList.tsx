@@ -1,5 +1,3 @@
-// src/components/organisms/todo/TodoList.tsx
-
 import { Box, Heading, VStack, Text, IconButton, Flex, Spacer, Badge, Menu, MenuButton, MenuList, MenuItem, HStack, Tooltip } from "@chakra-ui/react"
 import { type Todo } from "../../../types/todo"
 import { FaTrash, FaChevronDown, FaClock, FaCalendarAlt, FaPen } from "react-icons/fa"
@@ -29,7 +27,6 @@ export const TodoList = (props: Props) => {
           <Flex align="flex-start">
             <Box flex={1}>
               <HStack spacing={2} mb={1}>
-                {/* 🦁 優先度バッジを追加だお！ */}
                 <Badge 
                   variant="solid"
                   colorScheme={

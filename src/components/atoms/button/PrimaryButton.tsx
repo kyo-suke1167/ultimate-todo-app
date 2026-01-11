@@ -1,12 +1,10 @@
-// src/components/atoms/button/PrimaryButton.tsx
-
 import { Button } from "@chakra-ui/react"
-import type { ReactNode } from "react" // type を忘れずに！
+import type { ReactNode } from "react"
 
 type Props = {
   children: ReactNode;
   disabled?: boolean;
-  loading?: boolean;   // こっちは「loading」の名前のままでOKだお
+  loading?: boolean;
   onClick: () => void;
 }
 

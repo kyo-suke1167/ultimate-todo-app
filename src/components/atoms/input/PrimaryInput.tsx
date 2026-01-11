@@ -1,10 +1,10 @@
 import { Input } from "@chakra-ui/react"
-import type { ChangeEvent } from "react" // イベントの型が必要だお！
+import type { ChangeEvent } from "react"
 
 type Props = {
   placeholder?: string;
   value: string;
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void; // 入力した時の動き
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
 export const PrimaryInput = (props: Props) => {
@@ -15,11 +15,11 @@ export const PrimaryInput = (props: Props) => {
       placeholder={placeholder}
       value={value}
       onChange={onChange}
-      bg="gray.100"      // 背景は薄いグレー
-      borderRadius="md"  // 角を少し丸める
-      p={2}              // 内側の余白
-      outline="none"     // 選択時の青枠を消す（お好みで）
-      _focus={{ border: "2px solid teal" }} // 選択したら枠をティール色に！
+      bg="gray.100"
+      borderRadius="md"
+      p={2} 
+      outline="none"
+      _focus={{ border: "2px solid teal" }}
     />
   )
 }
